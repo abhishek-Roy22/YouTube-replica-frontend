@@ -56,9 +56,7 @@ const Signup = () => {
     e.preventDefault();
 
     if (!formValidation()) {
-      toast.error('Add required inputs', {
-        position: 'top-center',
-      });
+      toast.error('Add required inputs');
       return;
     }
 
@@ -86,7 +84,9 @@ const Signup = () => {
               name="username"
               type="text"
               placeholder="Enter your username"
-              className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+              className={`w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white ${
+                error.username && 'ring-1 ring-rose-800'
+              }`}
             />
             {error.username && (
               <p className="text-xs text-rose-800">{error.username}</p>
@@ -107,7 +107,9 @@ const Signup = () => {
               type="email"
               autoComplete="email"
               placeholder="Enter your email"
-              className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+              className={`w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white ${
+                error.email && 'ring-1 ring-rose-800'
+              }`}
             />
             {error.email && (
               <p className="text-xs text-rose-800">{error.email}</p>
@@ -128,7 +130,9 @@ const Signup = () => {
               type="password"
               autoComplete="current-password"
               placeholder="Enter your password"
-              className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+              className={`w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white ${
+                error.password && 'ring-1 ring-rose-800'
+              }`}
             />
             {error.password && (
               <p className="text-xs text-rose-800">{error.password}</p>
@@ -149,7 +153,9 @@ const Signup = () => {
               type="password"
               autoComplete="current-password"
               placeholder="Enter your password again"
-              className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+              className={`w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white ${
+                error.confirm_password && 'ring-1 ring-rose-800'
+              }`}
             />
             {error.confirm_password && (
               <p className="text-xs text-rose-800">{error.confirm_password}</p>

@@ -1,6 +1,57 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Login = () => {
+  const [error, setError] = useState({});
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+
+  const validateForm = () => {
+    const newError = {};
+
+    if (!formData.email) {
+      newError.email = 'Email is required';
+    }
+
+    if (!formData.password) {
+      newError.password = 'Password is required';
+    }
+
+    setError(newError);
+    return Object.keys(newError).length === 0;
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    // clear error while user typing
+    if (error[name]) {
+      setError((prev) => ({
+        ...prev,
+        [name]: '',
+      }));
+    }
+  };
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    if (!validateForm()) {
+      toast.error('Add required fields');
+      return;
+    }
+
+    toast.success('Form submitted successful');
+  }
+
   return (
     <>
       <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
@@ -8,7 +59,7 @@ const Login = () => {
           <h2 className="text-2xl font-bold text-center text-gray-900 dark:text-gray-100">
             Login
           </h2>
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label
                 htmlFor="email"
@@ -17,14 +68,20 @@ const Login = () => {
                 Email address
               </label>
               <input
+                value={formData.email}
+                onChange={handleChange}
                 id="email"
                 name="email"
                 type="email"
                 autoComplete="email"
-                required
                 placeholder="Enter your email"
-                className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                className={`w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white ${
+                  error.email && 'ring-2 ring-rose-800'
+                }`}
               />
+              {error.email && (
+                <p className="text-xs text-rose-800 p-0 m-0">{error.email}</p>
+              )}
             </div>
             <div>
               <label
@@ -34,14 +91,21 @@ const Login = () => {
                 Password
               </label>
               <input
+                value={formData.password}
+                onChange={handleChange}
                 id="password"
                 name="password"
                 type="password"
                 autoComplete="current-password"
-                required
                 placeholder="Enter your password"
-                className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                className={`w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
+                  ${error.password && 'ring-2 ring-rose-800'}`}
               />
+              {error.password && (
+                <p className="text-xs text-rose-800 p-0 m-0">
+                  {error.password}
+                </p>
+              )}
             </div>
             <div>
               <button
@@ -61,6 +125,7 @@ const Login = () => {
             </div>
           </form>
         </div>
+        <ToastContainer theme="dark" />
       </div>
     </>
   );
