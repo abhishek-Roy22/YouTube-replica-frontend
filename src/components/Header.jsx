@@ -30,7 +30,7 @@ const Header = ({ onClick }) => {
         <div className="hidden md:flex space-x-4">
           <Link
             to="/login"
-            className="flex items-center border border-sky-500 py-2 px-3 bg-sky-300 gap-1 rounded-2xl cursor-pointer"
+            className="flex items-center border border-indigo-500 py-2 px-3 bg-transparent gap-1 rounded-2xl cursor-pointer hover:bg-indigo-300 text-slate-100 hover:text-slate-800"
           >
             <CircleUserRound />
             <span>Sign in</span>

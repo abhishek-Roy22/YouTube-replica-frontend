@@ -1,5 +1,6 @@
+import { ArrowLeft } from 'lucide-react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 
 const Login = () => {
@@ -8,6 +9,8 @@ const Login = () => {
     email: '',
     password: '',
   });
+
+  const navigate = useNavigate();
 
   const validateForm = () => {
     const newError = {};
@@ -55,6 +58,13 @@ const Login = () => {
   return (
     <>
       <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
+        <button
+          onClick={() => navigate('/')}
+          className="border-none outline-none text-indigo-500 flex items-center fixed top-10 left-5"
+        >
+          <ArrowLeft />
+          <span>Back to home</span>
+        </button>
         <div className="w-full max-w-md p-8 space-y-6 bg-white dark:bg-gray-800 rounded shadow-md">
           <h2 className="text-2xl font-bold text-center text-gray-900 dark:text-gray-100">
             Login
