@@ -89,3 +89,15 @@ export const videos = [
     timestamp: '10:30',
   },
 ];
+
+export const filterCategories = [
+  'All',
+  'Music',
+  'Gaming',
+  'Live',
+  'Computer Programming',
+  'Podcasts',
+  'News',
+  'Cooking',
+  'Recently uploaded',
+];

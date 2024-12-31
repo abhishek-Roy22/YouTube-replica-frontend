@@ -1,8 +1,11 @@
-import { CircleUserRound, Menu, MenuIcon, Search, XIcon } from 'lucide-react';
+import { BadgePlus, CircleUserRound, Menu, Search } from 'lucide-react';
 import Logo from '../assets/youtube.png';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import CreateChannel from './CreateChannel';
 
 const Header = ({ onClick }) => {
+  const [openModal, setOpenModal] = useState(false);
   return (
     <header className="bg-gray-900 sticky top-0 p-4 border-b z-10">
       <div className="container mx-auto flex justify-between items-center">
@@ -10,7 +13,7 @@ const Header = ({ onClick }) => {
           <button onClick={() => onClick()}>
             <Menu color="white" />
           </button>
-          <div className="text-white text-2xl font-bold flex items-center gap-2">
+          <div className="text-slate-100 text-2xl font-bold flex items-center gap-2">
             <img src={Logo} alt="logo" width={50} />
             <span>YouTube</span>
           </div>
@@ -28,6 +31,13 @@ const Header = ({ onClick }) => {
           </div>
         </div>
         <div className="hidden md:flex space-x-4">
+          <button
+            onClick={() => setOpenModal(!openModal)}
+            className="flex items-center border border-indigo-500 py-2 px-3 bg-transparent gap-1 rounded-2xl cursor-pointer hover:bg-indigo-300 text-slate-100 hover:text-slate-800"
+          >
+            <BadgePlus />
+            <span>Create Channel</span>
+          </button>
           <Link
             to="/login"
             className="flex items-center border border-indigo-500 py-2 px-3 bg-transparent gap-1 rounded-2xl cursor-pointer hover:bg-indigo-300 text-slate-100 hover:text-slate-800"
