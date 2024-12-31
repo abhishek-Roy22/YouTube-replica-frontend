@@ -1,5 +1,6 @@
 import React from 'react';
 import { categories, menuItems } from '../utils/StaticData';
+import { Link } from 'react-router-dom';
 
 const Sidebar = ({ isOpen }) => {
   return (
@@ -12,7 +13,8 @@ const Sidebar = ({ isOpen }) => {
     >
       <div className="space-y-1">
         {menuItems.map(({ icon: Icon, label, active }) => (
-          <button
+          <Link
+            to="/"
             key={label}
             className={`
                  flex items-center w-full px-3 py-2 text-sm rounded-lg text-slate-100
@@ -24,7 +26,7 @@ const Sidebar = ({ isOpen }) => {
           >
             <Icon className="w-5 h-5 mr-4 text-slate-200" />
             {!isOpen && label}
-          </button>
+          </Link>
         ))}
       </div>
 

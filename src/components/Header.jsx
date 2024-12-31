@@ -1,11 +1,9 @@
 import { BadgePlus, CircleUserRound, Menu, Search } from 'lucide-react';
 import Logo from '../assets/youtube.png';
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import CreateChannel from './CreateChannel';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Header = ({ onClick }) => {
-  const [openModal, setOpenModal] = useState(false);
+  const navigate = useNavigate();
   return (
     <header className="bg-gray-900 sticky top-0 p-4 border-b z-10">
       <div className="container mx-auto flex justify-between items-center">
@@ -32,7 +30,7 @@ const Header = ({ onClick }) => {
         </div>
         <div className="hidden md:flex space-x-4">
           <button
-            onClick={() => setOpenModal(!openModal)}
+            onClick={() => navigate('/createChannel')}
             className="flex items-center border border-indigo-500 py-2 px-3 bg-transparent gap-1 rounded-2xl cursor-pointer hover:bg-indigo-300 text-slate-100 hover:text-slate-800"
           >
             <BadgePlus />

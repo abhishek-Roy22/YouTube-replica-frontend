@@ -1,6 +1,8 @@
-const VideoCard = ({ title, channel, thumbnail, views, timestamp }) => {
+import { Link } from 'react-router-dom';
+
+const VideoCard = ({ id, title, channel, thumbnail, views, timestamp }) => {
   return (
-    <div className="group cursor-pointer">
+    <Link to={`/watch/${id}`} className="group cursor-pointer">
       <div className="relative aspect-video overflow-hidden rounded-xl">
         <img
           src={thumbnail}
@@ -31,7 +33,7 @@ const VideoCard = ({ title, channel, thumbnail, views, timestamp }) => {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
