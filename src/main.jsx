@@ -7,8 +7,8 @@ import Home from './pages/Home.jsx';
 import Signup from './pages/Signup.jsx';
 import Login from './pages/Login.jsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import CreateChannel from './pages/CreateChannel.jsx';
 import VideoDetails from './pages/VideoDetails.jsx';
+import ChannelModal from './components/modals/ChannelModal.jsx';
 
 const appRouter = createBrowserRouter([
   {
@@ -36,7 +36,7 @@ const appRouter = createBrowserRouter([
   },
   {
     path: '/createChannel',
-    element: <CreateChannel />,
+    element: <ChannelModal />,
   },
 ]);
 
