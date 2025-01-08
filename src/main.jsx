@@ -9,6 +9,13 @@ import Login from './pages/Login.jsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import VideoDetails from './pages/VideoDetails.jsx';
 import ChannelModal from './components/modals/ChannelModal.jsx';
+import axios from 'axios';
+import store from './store/store.js';
+import { Provider } from 'react-redux';
+
+axios.defaults.baseURL =
+  'https://youtube-replica-backend-abhishekroy22s-projects.vercel.app';
+axios.defaults.withCredentials = true;
 
 const appRouter = createBrowserRouter([
   {
@@ -42,6 +49,8 @@ const appRouter = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={appRouter} />
+    <Provider store={store}>
+      <RouterProvider router={appRouter} />
+    </Provider>
   </StrictMode>
 );
