@@ -1,7 +1,10 @@
 import { ArrowLeft } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLoginMutation } from '../slices/userApiSlice';
+import { setCredentials } from '../slices/authSlice';
 
 const Login = () => {
   const [error, setError] = useState({});
@@ -11,6 +14,17 @@ const Login = () => {
   });
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [login, { isLoading }] = useLoginMutation();
+
+  const { userInfo } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate('/');
+    }
+  }, [navigate, userInfo]);
 
   const validateForm = () => {
     const newError = {};
@@ -44,7 +58,7 @@ const Login = () => {
     }
   };
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
 
     if (!validateForm()) {
@@ -52,7 +66,13 @@ const Login = () => {
       return;
     }
 
-    toast.success('Form submitted successful');
+    try {
+      const res = await login(formData.email, formData.password).unwrap();
+      dispatch(setCredentials({ ...res }));
+      navigate('/');
+    } catch (err) {
+      console.log(err?.data?.message || err.error);
+    }
   }
 
   return (
