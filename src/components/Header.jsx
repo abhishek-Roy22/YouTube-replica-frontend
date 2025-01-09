@@ -39,10 +39,8 @@ const Header = ({ onClick }) => {
           <div className="hidden md:flex space-x-4">
             {user ? (
               <>
-                <div className="w-10 h-10 rounded-full border-2 border-slate-200 flex items-center justify-center">
-                  <div className="w-full object-cover text-slate-100 font-bold">
-                    {user?.user.userName.charAt(0).toUpperCase()}
-                  </div>
+                <div className="w-10 h-10 rounded-full border-2 border-indigo-500 flex items-center justify-center text-slate-100 text-2xl font-bold p-2 bg-slate-400 cursor-pointer hover:ring-1 hover:ring-indigo-800">
+                  {user?.user.userName.charAt(0).toUpperCase()}
                 </div>
                 <button
                   onClick={() => dispatch(logoutUser())}
