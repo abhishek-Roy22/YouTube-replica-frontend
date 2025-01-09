@@ -56,6 +56,10 @@ const Login = () => {
       return;
     }
 
+    if (loading) {
+      toast.loading('Logging in...');
+    }
+
     try {
       await dispatch(
         loginUser({ email: formData.email, password: formData.password })
@@ -64,10 +68,6 @@ const Login = () => {
     } catch (err) {
       toast.error('Login failed. Please check your credentials.');
     }
-  }
-
-  if (loading) {
-    toast.loading('Logging in...');
   }
 
   return (
