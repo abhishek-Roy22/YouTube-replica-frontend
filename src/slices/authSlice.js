@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// Action
+// Action to login user
 export const loginUser = createAsyncThunk(
   'auth/loginUser',
   async ({ email, password }, { rejectWithValue }) => {
@@ -14,6 +14,7 @@ export const loginUser = createAsyncThunk(
   }
 );
 
+// Action to logout user
 export const logoutUser = createAsyncThunk(
   'auth/logoutUser',
   async (_, thunkAPI) => {
@@ -22,6 +23,19 @@ export const logoutUser = createAsyncThunk(
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+// Action to verify token
+export const verifyToken = createAsyncThunk(
+  'auth/verifyToken',
+  async (_, { rejectWithValue }) => {
+    try {
+      const res = await axios.get('/auth/check');
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
     }
   }
 );
@@ -56,6 +70,18 @@ const authSlice = createSlice({
         state.user = null;
       })
       .addCase(logoutUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(verifyToken.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(verifyToken.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload;
+      })
+      .addCase(verifyToken.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
