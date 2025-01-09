@@ -61,10 +61,14 @@ const Login = () => {
     }
 
     try {
-      await dispatch(
+      const resultAction = await dispatch(
         loginUser({ email: formData.email, password: formData.password })
       ).unwrap();
-      navigate('/');
+
+      if (resultAction) {
+        toast.success('Login successful!');
+        navigate('/');
+      }
     } catch (err) {
       toast.error('Login failed. Please check your credentials.');
     }

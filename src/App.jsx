@@ -2,9 +2,12 @@ import Header from './components/Header';
 import { Outlet } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { verifyToken } from './slices/authSlice';
 
 const App = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
 
   function handleToggle() {
     setIsOpen((prev) => !prev);
@@ -21,6 +24,10 @@ const App = () => {
     handleResize(); // Calling handler right away so state gets updated with initial window size
 
     return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    dispatch(verifyToken());
   }, []);
 
   return (
