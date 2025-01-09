@@ -13,8 +13,7 @@ import axios from 'axios';
 import store from './store/store.js';
 import { Provider } from 'react-redux';
 
-axios.defaults.baseURL =
-  'https://youtube-replica-backend-abhishekroy22s-projects.vercel.app';
+axios.defaults.baseURL = 'https://youtube-replica-backend.vercel.app';
 axios.defaults.withCredentials = true;
 
 const appRouter = createBrowserRouter([
