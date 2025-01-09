@@ -1,15 +1,15 @@
-import { BadgePlus, CircleUserRound, Menu, Search } from 'lucide-react';
+import { BadgePlus, CircleUserRound, LogOut, Menu, Search } from 'lucide-react';
 import Logo from '../assets/youtube.png';
 import { Link } from 'react-router-dom';
 import ChannelModal from './modals/ChannelModal';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { logoutUser } from '../slices/authSlice';
 
 const Header = ({ onClick }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
-
-  console.log(user);
 
   return (
     <>
@@ -38,7 +38,20 @@ const Header = ({ onClick }) => {
           </div>
           <div className="hidden md:flex space-x-4">
             {user ? (
-              <span>{user?.user.userName}</span>
+              <>
+                <div className="w-20 h-20 rounded-full border-blue-600">
+                  <span className="w-full object-cover text-slate-100 font-bold">
+                    {user?.user.userName.charAt(0).toUpperCase()}
+                  </span>
+                </div>
+                <button
+                  onClick={() => dispatch(logoutUser())}
+                  className="flex items-center border border-indigo-500 py-2 px-3 bg-transparent gap-1 rounded-2xl cursor-pointer hover:bg-indigo-300 text-slate-100 hover:text-slate-800"
+                >
+                  <LogOut />
+                  <span>Logout</span>
+                </button>
+              </>
             ) : (
               <>
                 <button

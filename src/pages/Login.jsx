@@ -2,7 +2,7 @@ import { ArrowLeft } from 'lucide-react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../slices/authSlice';
 
 const Login = () => {
@@ -14,6 +14,7 @@ const Login = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { loading } = useSelector((state) => state.auth);
 
   const validateForm = () => {
     const newError = {};
@@ -63,6 +64,10 @@ const Login = () => {
     } catch (err) {
       toast.error('Login failed. Please check your credentials.');
     }
+  }
+
+  if (loading) {
+    toast.loading('Logging in...');
   }
 
   return (
