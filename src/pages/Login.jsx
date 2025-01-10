@@ -56,19 +56,12 @@ const Login = () => {
       return;
     }
 
-    if (loading) {
-      toast.loading('Logging in...');
-    }
-
     try {
-      const resultAction = await dispatch(
+      await dispatch(
         loginUser({ email: formData.email, password: formData.password })
       ).unwrap();
 
-      if (resultAction) {
-        toast.success('Login successful!');
-        navigate('/');
-      }
+      navigate('/');
     } catch (err) {
       toast.error('Login failed. Please check your credentials.');
     }
@@ -138,6 +131,7 @@ const Login = () => {
             </div>
             <div>
               <button
+                disabled={loading}
                 type="submit"
                 className="w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
